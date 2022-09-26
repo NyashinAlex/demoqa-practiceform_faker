@@ -2,13 +2,11 @@ package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.demoqa.pages.PracticeFormPage;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+import java.util.Locale;
 
 public class PracticeFormTests {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
@@ -20,7 +18,19 @@ public class PracticeFormTests {
     @Test
     void fillPracticeForm() {
 
+        Faker faker = new Faker(new Locale("ru"));
 
+        String firstName,
+                lastName,
+                userName,
+                gender,
+                userNumber,
+                birthDate,
+                subjects,
+                hobbies,
+                picture = "user.jpg",
+                state,
+                city;
 
         practiceFormPage.openPage()
                 .setFirstName("Alex")
