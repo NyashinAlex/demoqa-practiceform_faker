@@ -21,6 +21,7 @@ public class PracticeFormTests {
     void fillPracticeForm() {
 
 
+
         practiceFormPage.openPage()
                 .setFirstName("Alex")
                 .setLastName("Nyashin")
