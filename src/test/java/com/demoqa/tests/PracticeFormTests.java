@@ -38,7 +38,7 @@ public class PracticeFormTests {
         userEmail = faker.internet().safeEmailAddress(firstName + lastName);
         gender = choiceGender();
         userNumber = faker.phoneNumber().subscriberNumber(10);
-//        birthDate = ;
+//        birthDate =  ;
     }
 
     @Test

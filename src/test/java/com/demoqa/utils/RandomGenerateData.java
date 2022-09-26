@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class RandomGenerateData {
     public static String choiceGender() {
+
         String[] array = {
                 "Male",
                 "Female",
