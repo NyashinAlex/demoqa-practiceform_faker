@@ -20,6 +20,7 @@ public class PracticeFormTests {
     @Test
     void fillPracticeForm() {
 
+
         practiceFormPage.openPage()
                 .setFirstName("Alex")
                 .setLastName("Nyashin")
