@@ -7,12 +7,17 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Month;
+
 import static com.demoqa.utils.RandomGenerateData.*;
 
 public class PracticeFormTests {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
     Faker faker = new Faker();
 
+    Month month = Month.of( 01 );//ДОРАБОТАТЬ!!!!!
+
+    int z = 0;
     String firstName,
             lastName,
             userEmail,
@@ -53,7 +58,7 @@ public class PracticeFormTests {
                 .setUserEmail(userEmail)
                 .setGender(gender)
                 .setUserNumber(userNumber)
-                //.setBirthDate(birthDate.substring(0,4),birthDate.substring(5,7),birthDate.substring(8))
+                //.setBirthDate(birthDate.substring(0,4),(birthDate.substring(5,7)),birthDate.substring(8))
                 .setSubjects(subjects)
                 .setHobbies(hobbies)
                 .uploadPicture(picture)
