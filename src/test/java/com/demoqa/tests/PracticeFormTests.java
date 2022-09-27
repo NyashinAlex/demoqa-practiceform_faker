@@ -7,9 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Locale;
-
-import static com.demoqa.utils.RandomGenerateData.choiceGender;
+import static com.demoqa.utils.RandomGenerateData.*;
 
 public class PracticeFormTests {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
@@ -24,6 +22,7 @@ public class PracticeFormTests {
             subjects,
             hobbies,
             picture = "user.jpg",
+            currentAddress,
             state,
             city;
     @BeforeAll
@@ -38,7 +37,12 @@ public class PracticeFormTests {
         userEmail = faker.internet().safeEmailAddress(firstName + lastName);
         gender = choiceGender();
         userNumber = faker.phoneNumber().subscriberNumber(10);
-//        birthDate =  ;
+        birthDate =  String.valueOf(generateBirthDate());
+        subjects = choiceSubject();
+        hobbies = choiceHobbies();
+        currentAddress = faker.address().fullAddress();
+        state = choiceState();
+        city = choiceCity(state);
     }
 
     @Test
@@ -49,13 +53,13 @@ public class PracticeFormTests {
                 .setUserEmail(userEmail)
                 .setGender(gender)
                 .setUserNumber(userNumber)
-                .setBirthDate("1996","July","07")
-                .setSubjects("Maths")
-                .setHobbies("Sports")
-                .uploadPicture("user.jpg")
-                .setCurrentAddress("Moscow")
-                .setState("NCR")
-                .setCity("Delhi")
+                //.setBirthDate(birthDate.substring(0,4),birthDate.substring(5,7),birthDate.substring(8))
+                .setSubjects(subjects)
+                .setHobbies(hobbies)
+                .uploadPicture(picture)
+                .setCurrentAddress(currentAddress)
+                .setState(state)
+                .setCity(city)
                 .clickSubmitButton();
 
         practiceFormPage.checkVisible()
@@ -64,11 +68,11 @@ public class PracticeFormTests {
                 .checkTableElement("Gender", gender)
                 .checkTableElement("Mobile", userNumber)
                 .checkTableElement("Date of Birth", "07 July,1996")
-                .checkTableElement("Subjects", "Maths")
-                .checkTableElement("Hobbies", "Sports")
-                .checkTableElement("Picture", "user.jpg")
-                .checkTableElement("Address", "Moscow")
-                .checkTableElement("State and City", "NCR Delhi");
+                .checkTableElement("Subjects", subjects)
+                .checkTableElement("Hobbies", hobbies)
+                .checkTableElement("Picture", picture)
+                .checkTableElement("Address", currentAddress)
+                .checkTableElement("State and City", state + " " + city);
 
     }
     @Test
@@ -79,7 +83,7 @@ public class PracticeFormTests {
                 .setLastName(lastName)
                 .setGender(gender)
                 .setUserNumber(userNumber)
-                .setBirthDate("1996","July","07")
+                //.setBirthDate("1996","July","07")
                 .clickSubmitButton();
 
         practiceFormPage.checkVisible()
