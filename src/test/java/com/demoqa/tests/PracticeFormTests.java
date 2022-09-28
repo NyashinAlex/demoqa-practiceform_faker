@@ -7,23 +7,20 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.Month;
-
 import static com.demoqa.utils.RandomGenerateData.*;
 
 public class PracticeFormTests {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
     Faker faker = new Faker();
-
-    Month month = Month.of( 01 );//ДОРАБОТАТЬ!!!!!
-
-    int z = 0;
     String firstName,
             lastName,
             userEmail,
             gender,
             userNumber,
             birthDate,
+            year,
+            month,
+            day,
             subjects,
             hobbies,
             picture = "user.jpg",
@@ -43,6 +40,9 @@ public class PracticeFormTests {
         gender = choiceGender();
         userNumber = faker.phoneNumber().subscriberNumber(10);
         birthDate =  String.valueOf(generateBirthDate());
+        year = birthDate.substring(0,4);
+        month = getMonthText(birthDate.substring(5,7));
+        day = birthDate.substring(8);
         subjects = choiceSubject();
         hobbies = choiceHobbies();
         currentAddress = faker.address().fullAddress();
@@ -58,7 +58,7 @@ public class PracticeFormTests {
                 .setUserEmail(userEmail)
                 .setGender(gender)
                 .setUserNumber(userNumber)
-                //.setBirthDate(birthDate.substring(0,4),(birthDate.substring(5,7)),birthDate.substring(8))
+                .setBirthDate(year, month, day)
                 .setSubjects(subjects)
                 .setHobbies(hobbies)
                 .uploadPicture(picture)
@@ -72,7 +72,7 @@ public class PracticeFormTests {
                 .checkTableElement("Student Email",userEmail)
                 .checkTableElement("Gender", gender)
                 .checkTableElement("Mobile", userNumber)
-                .checkTableElement("Date of Birth", "07 July,1996")
+                .checkTableElement("Date of Birth", day + " " + month + "," + year)
                 .checkTableElement("Subjects", subjects)
                 .checkTableElement("Hobbies", hobbies)
                 .checkTableElement("Picture", picture)
@@ -88,13 +88,13 @@ public class PracticeFormTests {
                 .setLastName(lastName)
                 .setGender(gender)
                 .setUserNumber(userNumber)
-                //.setBirthDate("1996","July","07")
+                .setBirthDate(year, month, day)
                 .clickSubmitButton();
 
         practiceFormPage.checkVisible()
                 .checkTableElement("Student Name",firstName + " " + lastName)
                 .checkTableElement("Gender", gender)
                 .checkTableElement("Mobile", userNumber)
-                .checkTableElement("Date of Birth", "07 July,1996");
+                .checkTableElement("Date of Birth", day + " " + month + "," + year);
     }
 }

@@ -2,8 +2,11 @@ package com.demoqa.utils;
 
 import java.awt.event.HierarchyEvent;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Period;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 
@@ -66,5 +69,9 @@ public class RandomGenerateData {
         }
         int randomCity = new Random().nextInt(city.size());
         return city.get(randomCity);
+    }
+    public static String getMonthText(String numberMonth) {
+        String month = Month.of(Integer.parseInt(numberMonth)).getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        return month;
     }
 }
