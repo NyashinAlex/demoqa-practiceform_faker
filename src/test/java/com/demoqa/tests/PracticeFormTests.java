@@ -2,6 +2,7 @@ package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.demoqa.pages.PracticeFormPage;
+import com.demoqa.utils.Month;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,21 +13,7 @@ import static com.demoqa.utils.RandomGenerateData.*;
 public class PracticeFormTests {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
     Faker faker = new Faker();
-    String firstName,
-            lastName,
-            userEmail,
-            gender,
-            userNumber,
-            birthDate,
-            year,
-            month,
-            day,
-            subjects,
-            hobbies,
-            picture = "user.jpg",
-            currentAddress,
-            state,
-            city;
+    String firstName, lastName, userEmail, gender, userNumber, birthDate, year, month, day, subjects, hobbies, picture = "user.jpg", currentAddress, state, city;
     @BeforeAll
     static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
@@ -40,9 +27,9 @@ public class PracticeFormTests {
         gender = choiceGender();
         userNumber = faker.phoneNumber().subscriberNumber(10);
         birthDate =  String.valueOf(generateBirthDate());
-        year = birthDate.substring(0,4);
-        month = getMonthText(birthDate.substring(5,7));
-        day = birthDate.substring(8);
+        year = getRandomYear();
+        month = String.valueOf(Month.getRandom());
+        day = getRandomDay();
         subjects = choiceSubject();
         hobbies = choiceHobbies();
         currentAddress = faker.address().fullAddress();
